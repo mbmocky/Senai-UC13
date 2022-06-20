@@ -52,7 +52,7 @@ INSERT INTO ClasseHabilidade(ClasseId, HabilidadeId) VALUES (1, 1), (1, 2)
 
 INSERT INTO Usuarios VALUES ('email02@email.com', '123456')
 INSERT INTO Classes VALUES ('Monge', 'Monge Necromante.')
-INSERT INTO Habilidades VALUES ('Hadouken')
+INSERT INTO Habilidades VALUES ('Recuperar Vida')
 INSERT INTO Personagens (NomePersonagem, UsuarioId, ClasseId) VALUES ('BitBug', 2, 2)
 INSERT INTO ClasseHabilidade(ClasseId, HabilidadeId) VALUES (2, 2), (2, 3)
 
@@ -70,4 +70,49 @@ SELECT * FROM Classes
 SELECT P.NomePersonagem, C.Nome 'Classe', C.Descricao FROM Personagens AS P JOIN Classes C
 ON P.ClasseId = C.ClasseId
 
-SELECT P.NomePersonagem, C.Nome 'Nome da Classe', C.Descricao, U.Email, U.Senha FROM Personagens AS P JOIN Classes AS C ON P.ClasseId = C.ClasseId join Usuarios AS U on P.UsuarioId = U.UsuarioId
+CREATE DATABASE ExemploJoin
+GO
+
+USE ExemploJoin
+GO
+
+--DDL
+CREATE TABLE TabelaA(
+	Nome varchar(50) NOT NULL
+)
+
+GO
+
+CREATE TABLE TabelaB(
+	Nome varchar(50) NOT NULL
+)
+GO
+
+--DML
+
+INSERT INTO TabelaA VALUES('Fernanda')
+INSERT INTO TabelaA VALUES('Josefa')
+INSERT INTO TabelaA VALUES('Luiz')
+INSERT INTO TabelaA VALUES('Fernando')
+
+INSERT INTO TabelaB VALUES ('Carlos'),('Manoel'),('Luiz'),('Fernando')
+
+SELECT TabelaA.Nome, TabelaB.Nome  FROM TabelaA INNER JOIN TabelaB
+ON TabelaA.Nome = TabelaB.Nome
+
+SELECT TabelaA.Nome, TabelaB.Nome  FROM TabelaA LEFT JOIN TabelaB
+ON TabelaA.Nome = TabelaB.Nome
+
+SELECT TabelaA.Nome, TabelaB.Nome  FROM TabelaA RIGHT JOIN TabelaB
+ON TabelaA.Nome = TabelaB.Nome
+
+SELECT TabelaA.Nome, TabelaB.Nome  FROM TabelaA FULL OUTER JOIN TabelaB
+ON TabelaA.Nome = TabelaB.Nome
+
+SELECT TabelaA.Nome, TabelaB.Nome  FROM TabelaA FULL OUTER JOIN TabelaB
+ON TabelaA.Nome = TabelaB.Nome
+Where TabelaA.Nome IS NULL
+
+SELECT TabelaA.Nome, TabelaB.Nome  FROM TabelaA FULL OUTER JOIN TabelaB
+ON TabelaA.Nome = TabelaB.Nome
+Where TabelaB.Nome IS NULL OR TabelaA.Nome IS NULL
